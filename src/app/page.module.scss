@@ -1,0 +1,58 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	max-width: var(--max-width);
+	position: relative;
+
+	.call-to-action > span {
+		align-items: center;
+		display: flex;
+		font-size: 2rem;
+		gap: 2rem;
+	}
+
+	.video {
+		height: 100%;
+		inset: 0;
+		max-height: 100%;
+		object-fit: cover;
+		object-position: center;
+		position: absolute;
+		width: 100%;
+	}
+
+	h2, p {
+		text-shadow: 0 0 10px black;
+	}
+
+	h2 {
+		font-size: 4em;
+	}
+
+	p {
+		font-size: 1.5em;
+		line-height: 1.5;
+	}
+}
+
+.page-background {
+	float: right;
+	// position: relative !important;
+	shape-outside: polygon(
+		31.53% 65.17%,
+		28.54% 60.39%,
+		41.54% 54.14%,
+		45.22% 48.51%,
+		53.11% 45.34%,
+		64.14% 46.29%,
+		76.68% 49.87%,
+		77.35% 56.25%,
+		66.14% 56.47%,
+		69.13% 62.77%,
+		65.14% 82.52%,
+		48.05% 85.08%,
+		41.74% 61.88%
+	);
+	z-index: -1;
+}

@@ -1,0 +1,17 @@
+.link {
+	color: var(--palette-link-color);
+	display: inline-flex;
+	position: relative;
+	text-decoration: none;
+
+	&.is-active,
+	&:focus,
+	&:hover {
+		color: var(--palette-link-active-color);
+	}
+
+	&.is-active {
+		background-color: hsla(var(--palette-link-active-color-hsl), 0.16);
+		font-weight: 500;
+	}
+}

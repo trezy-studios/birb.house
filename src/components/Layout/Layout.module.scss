@@ -1,0 +1,17 @@
+.container {
+	--layout-padding: 12px;
+
+	display: grid;
+	grid-template-areas: 'banner content';
+	grid-template-columns: auto 1fr;
+	height: 100vh;
+	max-width: 100vw;
+	max-height: 100vh;
+	min-height: 100vh;
+	overflow: hidden;
+
+	.content {
+		grid-area: content;
+		overflow: auto;
+	}
+}

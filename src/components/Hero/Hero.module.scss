@@ -1,0 +1,86 @@
+.hero {
+	--content-align-items: center;
+	--content-justify-content: center;
+
+	align-items: var(--content-align-items);
+	display: flex;
+	justify-content: var(--content-justify-content);
+	min-height: 100vh;
+	padding: 6rem;
+	position: relative;
+  width: 100%;
+
+	&.content-position-x-left {
+		--content-justify-content: flex-start;
+	}
+
+	&.content-position-x-right {
+		--content-justify-content: flex-end;
+	}
+
+	&.content-position-y-bottom {
+		--content-align-items: flex-end;
+	}
+
+	&.content-position-y-top {
+		--content-align-items: flex-start;
+	}
+}
+
+.background {
+	--object-fit: cover;
+	--object-position-x: center;
+	--object-position-y: center;
+
+	align-items: stretch;
+	display: flex;
+	height: 100%;
+	left: 50%;
+	pointer-events: none;
+	position: absolute;
+	top: 0;
+	transform: translateX(-50%);
+	width: 100%;
+	z-index: 0;
+
+	> * {
+		display: block;
+		object-fit: var(--object-fit);
+		object-position: var(--object-position-x) var(--object-position-y);
+		width: 100%;
+	}
+
+	&:after {
+		background: rgba(0, 0, 0, 0.5);
+		content: '';
+		display: block;
+		display: none;
+		inset: 0;
+		position: absolute;
+		z-index: 2;
+	}
+
+	&.fit-contain {
+		--object-fit: contain;
+	}
+
+	&.position-x-left {
+		--object-position-x: left;
+	}
+
+	&.position-x-right {
+		--object-position-x: right;
+	}
+
+	&.position-y-bottom {
+		--object-position-y: bottom;
+	}
+
+	&.position-y-top {
+		--object-position-y: top;
+	}
+}
+
+.hero-content {
+	max-width: var(--max-width);
+}

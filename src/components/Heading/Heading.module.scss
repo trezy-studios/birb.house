@@ -1,0 +1,38 @@
+.heading {
+	&.level-2 {
+		font-family: var(--font-heyam-pro);
+		font-size: 10rem;
+		letter-spacing: 0.3rem;
+		line-height: 0.75;
+	}
+
+	&.level-3 {
+		// color: var(--palette-lightest-grey);
+		// font-family: var(--font-heyam-pro);
+		// font-size: 20px;
+		// font-weight: 500;
+		// line-height: 24px;
+
+		// @media (max-width: 900px) {
+		// 	font-size: 22px;
+		// }
+	}
+
+	// &.level-4 {
+	// 	font-size: 26px;
+
+	// 	@media (max-width: 900px) {
+	// 		font-size: 20px;
+	// 		font-weight: 600;
+	// 	}
+	// }
+
+	// &.level-5 {
+	// 	font-size: 24px;
+	// 	font-weight: 600;
+
+	// 	@media (max-width: 900px) {
+	// 		font-size: 18px;
+	// 	}
+	// }
+}

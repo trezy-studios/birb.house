@@ -1,0 +1,64 @@
+/******************************************************************************\
+  Mixins
+\******************************************************************************/
+
+@import './mixins/generateColourCustomProperties';
+@import './mixins/generateColourCustomPropertiesFromColour';
+
+
+
+
+
+/******************************************************************************\
+  Variables
+\******************************************************************************/
+
+@import './variables/colors';
+@import './variables/sizes';
+@import './variables/ui-scale';
+
+
+
+
+
+/******************************************************************************\
+  Root styles
+\******************************************************************************/
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+
+	@media (prefers-reduced-motion: reduce) {
+		&,
+		&:after,
+		&:before {
+			animation-duration: 0.0001s !important;
+			animation-delay: 0.0001s !important;
+			transition-duration: 0.0001s !important;
+			transition-delay: 0.0001s !important;
+		}
+	}
+}
+
+body,
+html {
+	min-height: 100vh;
+}
+
+html {
+	background-color: var(--palette-background-color);
+	color: var(--palette-foreground-color);
+	color-scheme: dark;
+	font-size: 10px;
+	scroll-behavior: smooth;
+}
+
+body {
+	color: var(--palette-yellow);
+	font-family: 'hoss-round', sans-serif;
+	font-weight: 400;
+	font-size: 1.4rem;
+	font-style: normal;
+}
