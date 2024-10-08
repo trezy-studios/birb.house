@@ -5,15 +5,15 @@ import type { TypeComponentSeoSkeleton } from "./TypeComponentSeo";
 
 export interface TypePageBlogPostFields {
     internalName: EntryFieldTypes.Symbol;
-    seoFields?: EntryFieldTypes.EntryLink<TypeComponentSeoSkeleton>;
-    slug: EntryFieldTypes.Symbol;
-    author?: EntryFieldTypes.EntryLink<TypeComponentAuthorSkeleton>;
-    publishedDate: EntryFieldTypes.Date;
     title: EntryFieldTypes.Symbol;
+    publishedDate: EntryFieldTypes.Date;
+    slug: EntryFieldTypes.Symbol;
     shortDescription?: EntryFieldTypes.Text;
     content: EntryFieldTypes.RichText;
-    relatedBlogPosts?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypePageBlogPostSkeleton>>;
+    author?: EntryFieldTypes.EntryLink<TypeComponentAuthorSkeleton>;
     featuredImage: EntryFieldTypes.EntryLink<TypeComponentRichImageSkeleton>;
+    seoFields?: EntryFieldTypes.EntryLink<TypeComponentSeoSkeleton>;
+    relatedBlogPosts?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypePageBlogPostSkeleton>>;
 }
 
 export type TypePageBlogPostSkeleton = EntrySkeletonType<TypePageBlogPostFields, "pageBlogPost">;

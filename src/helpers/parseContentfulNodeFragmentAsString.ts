@@ -6,7 +6,7 @@
  */
 export function parseContentfulNodeFragmentAsString(
 	nodeFragment: any,
-) {
+): string {
 	if (nodeFragment.content) {
 		return nodeFragment.content.reduce((
 			accumulator: string,

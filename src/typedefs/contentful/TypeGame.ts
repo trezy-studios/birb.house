@@ -13,6 +13,12 @@ export interface TypeGameFields {
     itchURL?: EntryFieldTypes.Symbol;
     textColor: EntryFieldTypes.Symbol;
     backgroundColor: EntryFieldTypes.Symbol;
+    playMode: EntryFieldTypes.Symbol<"CoOp" | "MultiPlayer" | "SinglePlayer">;
+    numberOfPlayers?: EntryFieldTypes.Integer;
+    platforms?: EntryFieldTypes.Array<EntryFieldTypes.Symbol<"Android" | "Linux" | "Nintendo Switch" | "Playstation 5" | "Windows" | "Xbox One" | "iOS" | "macOS" | "tvOS">>;
+    copyrightYear?: EntryFieldTypes.Integer;
+    status?: EntryFieldTypes.Symbol<"Early Access" | "In Development" | "Open Beta" | "Released">;
+    isFamilyFriendly?: EntryFieldTypes.Boolean;
 }
 
 export type TypeGameSkeleton = EntrySkeletonType<TypeGameFields, "game">;
