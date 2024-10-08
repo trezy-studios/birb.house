@@ -1654,6 +1654,7 @@ __metadata:
     react-dom: "npm:^18.3.1"
     recharts: "npm:^2.12.7"
     sass: "npm:^1.79.4"
+    schema-dts: "npm:^1.1.2"
     statery: "npm:^0.7.1"
     steam-signin: "npm:^1.0.3"
     typescript: "npm:^5.6.2"
@@ -5693,6 +5694,15 @@ __metadata:
   dependencies:
     loose-envify: "npm:^1.1.0"
   checksum: 10c0/26383305e249651d4c58e6705d5f8425f153211aef95f15161c151f7b8de885f24751b377e4a0b3dd42cce09aad3f87a61dab7636859c0d89b7daf1a1e2a5c78
+  languageName: node
+  linkType: hard
+
+"schema-dts@npm:^1.1.2":
+  version: 1.1.2
+  resolution: "schema-dts@npm:1.1.2"
+  peerDependencies:
+    typescript: ">=4.1.0"
+  checksum: 10c0/bcca8719b1bb1cd71ba2b01a5126b3579e917a2f193e10fcffe020fa42fef911776ed9d2197c9f376780e703994b3ab854db3f962c47064f7282f41eff0f1d24
   languageName: node
   linkType: hard
 

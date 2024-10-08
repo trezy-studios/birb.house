@@ -1,8 +1,21 @@
-export const BIRBHOUSEGAMES_JSONLD = {
+// Module imports
+import {
+	type Organization,
+	type WithContext,
+} from 'schema-dts'
+
+
+
+
+
+export const BIRBHOUSEGAMES_JSONLD: WithContext<Organization> = {
 	'@context': 'https://schema.org',
 	'@id': 'https://birb.house/#organization',
 	'@type': 'Organization',
-	contactPoint: { email: 'hello@birb.house' },
+	contactPoint: {
+		'@type': 'ContactPoint',
+		email: 'hello@birb.house',
+	},
 	founders: [
 		{ '@id': 'https://trezy.codes' },
 	],
