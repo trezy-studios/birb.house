@@ -74,7 +74,7 @@ export async function getAllArticles() {
 			order: ['-fields.publishedDate'],
 		})
 
-	return contentfulResponse.items.map(parseArticle)
+	return contentfulResponse.items
 }
 
 /**
