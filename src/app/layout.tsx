@@ -5,6 +5,7 @@ import {
 	type Metadata,
 	type Viewport,
 } from 'next'
+import { GoogleAnalytics } from '@next/third-parties/google'
 import localFont from 'next/font/local'
 
 
@@ -63,6 +64,8 @@ export default function RootLayout(props: Props) {
 				<JSONLD data={TREZY_JSONLD} />
 				<JSONLD data={BIRBHOUSEGAMES_JSONLD} />
 			</body>
+
+			<GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID!} />
 		</html>
 	)
 }
