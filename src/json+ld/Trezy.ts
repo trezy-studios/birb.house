@@ -1,18 +1,14 @@
 // Module imports
-import {
-	type Person,
-	type WithContext,
-} from 'schema-dts'
+import { type Person } from 'schema-dts'
 
 
 
 
 
-export const TREZY_JSONLD: WithContext<Person> = {
-	'@context': 'https://schema.org',
-	'@id': 'https://trezy.codes',
+export const TREZY_JSONLD: Person = {
+	'@id': 'https://trezy.codes/#person',
 	'@type': 'Person',
-	jobTitle: 'Founder',
 	givenName: 'Trezy',
+	jobTitle: 'Founder',
 	url: 'http://trezy.codes',
 }

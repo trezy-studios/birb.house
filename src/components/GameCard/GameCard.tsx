@@ -8,13 +8,10 @@ import {
 	faItchIo,
 	faSteam,
 } from '@fortawesome/free-brands-svg-icons'
-import {
-	type VideoGame,
-	type WithContext,
-} from 'schema-dts'
 import { faGlobe } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useMemo } from 'react'
+import { type VideoGame } from 'schema-dts'
 
 
 
@@ -30,12 +27,12 @@ import { faGOG } from '@/icons/faGOG'
 import { faHumbleBundle } from '@/icons/faHumbleBundle'
 import { Heading } from '@/components/Heading/Heading'
 import { Hero } from '@/components/Hero/Hero'
-import { JSONLD } from '../JSONLD/JSONLD'
 import { Link } from '@/components/Link/Link'
 import { parseContentfulNodeFragment } from '@/helpers/parseContentfulNodeFragment'
 import { parseContentfulNodeFragmentAsString } from '@/helpers/parseContentfulNodeFragmentAsString'
 // import { ScreenReaderText } from '@/components/ScreenReaderText/ScreenReaderText'
 import { type TypeGameSkeleton } from '@/typedefs/contentful/TypeGame'
+import { useJSONLD } from '@/hooks/useJSONLD'
 
 
 
@@ -54,6 +51,59 @@ type Props = {
 /** Renders a game card. */
 export function GameCard(props: Props) {
 	const { game } = props
+
+	useJSONLD((() => {
+		const result: VideoGame = {
+			'@id': `https://birb.house/games/${game.fields.name}#videogame`,
+			'@type': 'VideoGame',
+			accessMode: ['textual', 'visual'],
+			applicationCategory: 'Game',
+			applicationSubCategory: 'Puzzle Game',
+			copyrightHolder: { '@id': 'https://birb.house#corporation' },
+			countryOfOrigin: {
+				'@type': 'Country',
+				name: 'USA'
+			},
+			description: parseContentfulNodeFragmentAsString(game.fields.description),
+			name: game.fields.name as string,
+			producer: { '@id': 'https://birb.house#corporation' },
+			publisher: { '@id': 'https://birb.house#corporation' },
+		}
+
+		if ('copyrightYear' in game.fields) {
+			result.copyrightYear = game.fields.copyrightYear as number
+			result.copyrightNotice = `Copyright ${game.fields.copyrightYear}-${(new Date).getFullYear()} Birbhouse Games. All rights reserved.`
+		} else {
+			result.copyrightNotice = `Copyright ${(new Date).getFullYear()} Birbhouse Games. All rights reserved.`
+		}
+
+		if ('isFamilyFriendly' in game.fields) {
+			result.isFamilyFriendly = game.fields.isFamilyFriendly as boolean
+		}
+
+		if (typeof game.fields.numberOfPlayers === 'number') {
+			result.numberOfPlayers = {
+				'@type': 'QuantitativeValue',
+				value: game.fields.numberOfPlayers,
+			}
+		}
+
+		if ('platforms' in game.fields) {
+			result.gamePlatform = game.fields.platforms as string[]
+		}
+
+		if ('playMode' in game.fields) {
+			result.playMode = game.fields.playMode as 'CoOp' | 'SinglePlayer' | 'MultiPlayer'
+		}
+
+		if (typeof game.fields.websiteURL === 'string') {
+			result['@id'] = `${game.fields.websiteURL}/#videogame`
+			result.sameAs = game.fields.websiteURL
+			result.url = game.fields.websiteURL
+		}
+
+		return result
+	})())
 
 	const background = useMemo(() => {
 		const heroImage = game.fields.heroImage as Asset | undefined
@@ -111,70 +161,6 @@ export function GameCard(props: Props) {
 		'--background-color': game.fields.backgroundColor,
 		'--text-color': game.fields.textColor,
 	}), [game])
-
-	const jsonLD = useMemo(() => {
-		const result: WithContext<VideoGame> = {
-			'@context': 'https://schema.org',
-			'@id': 'https://trezy.codes',
-			'@type': 'VideoGame',
-			accessMode: ['textual', 'visual'],
-			applicationCategory: 'Game',
-			copyrightHolder: {
-				'@id': 'https://birb.house#organization',
-				'@type': 'Organization',
-				name: 'Birbhouse Games',
-			},
-			countryOfOrigin: {
-				'@type': 'Country',
-				name: 'USA'
-			},
-			description: parseContentfulNodeFragmentAsString(game.fields.description),
-			name: game.fields.name as string,
-			producer: {
-				'@id': 'https://birb.house#organization',
-				'@type': 'Organization',
-				name: 'Birbhouse Games',
-			},
-			publisher: {
-				'@id': 'https://birb.house#organization',
-				'@type': 'Organization',
-				name: 'Birbhouse Games',
-			},
-		}
-
-		if ('copyrightYear' in game.fields) {
-			result.copyrightYear = game.fields.copyrightYear as number
-			result.copyrightNotice = `Copyright ${game.fields.copyrightYear}-${(new Date).getFullYear()} Birbhouse Games. All rights reserved.`
-		} else {
-			result.copyrightNotice = `Copyright ${(new Date).getFullYear()} Birbhouse Games. All rights reserved.`
-		}
-
-		if ('isFamilyFriendly' in game.fields) {
-			result.isFamilyFriendly = game.fields.isFamilyFriendly as boolean
-		}
-
-		if (typeof game.fields.numberOfPlayers === 'number') {
-			result.numberOfPlayers = {
-				'@type': 'QuantitativeValue',
-				value: game.fields.numberOfPlayers,
-			}
-		}
-
-		if ('platforms' in game.fields) {
-			result.gamePlatform = game.fields.platforms as string[]
-		}
-
-		if ('playMode' in game.fields) {
-			result.playMode = game.fields.playMode as 'CoOp' | 'SinglePlayer' | 'MultiPlayer'
-		}
-
-		if (typeof game.fields.websiteURL === 'string') {
-			result.sameAs = game.fields.websiteURL
-			result.url = game.fields.websiteURL
-		}
-
-		return result
-	}, [game])
 
 	return (
 		<Hero
@@ -254,8 +240,6 @@ export function GameCard(props: Props) {
 					</Link>
 				)}
 			</div>
-
-			<JSONLD data={jsonLD} />
 		</Hero>
 	)
 }

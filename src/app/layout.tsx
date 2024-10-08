@@ -7,6 +7,7 @@ import {
 } from 'next'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import localFont from 'next/font/local'
+import { PropsWithChildren } from 'react'
 
 
 
@@ -15,11 +16,12 @@ import localFont from 'next/font/local'
 // Local imports
 import '@/styles/app.scss'
 
-import { JSONLD } from '@/components/JSONLD/JSONLD'
-import Layout from '@/components/Layout/Layout'
-import { PropsWithChildren } from 'react'
 import { BIRBHOUSEGAMES_JSONLD } from '@/json+ld/BirbhouseGames'
+import { JSONLDRenderer } from '@/components/JSONLDRenderer/JSONLDRenderer'
+import Layout from '@/components/Layout/Layout'
 import { TREZY_JSONLD } from '@/json+ld/Trezy'
+import { WEBSITE_JSONLD } from '@/json+ld/Website'
+import { useJSONLD } from '@/hooks/useJSONLD'
 
 
 
@@ -46,6 +48,10 @@ const heyamPro = localFont({
 export default function RootLayout(props: Props) {
 	const { children } = props
 
+	useJSONLD(BIRBHOUSEGAMES_JSONLD)
+	useJSONLD(TREZY_JSONLD)
+	useJSONLD(WEBSITE_JSONLD)
+
 	return (
 		<html
 			className={heyamPro.variable}
@@ -61,8 +67,7 @@ export default function RootLayout(props: Props) {
 					{children}
 				</Layout>
 
-				<JSONLD data={TREZY_JSONLD} />
-				<JSONLD data={BIRBHOUSEGAMES_JSONLD} />
+				<JSONLDRenderer />
 			</body>
 
 			<GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID!} />
